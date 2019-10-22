@@ -17,13 +17,13 @@
       <key>metadata</key>
       <dict>
         <key>bundle-identifier</key>
-        <string>kr.co.xcolo.roadriskinfoapp</string>
+        <string>com.acebed.aceroom</string>
         <key>bundle-version</key>
-        <string>1.0</string>
+        <string>0.1</string>
         <key>kind</key>
         <string>software</string>
         <key>title</key>
-        <string>도로위험정보수집</string>
+        <string>Ace Room</string>
       </dict>
     </dict>
   </array>
