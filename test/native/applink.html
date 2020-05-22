@@ -21,20 +21,22 @@
       content: {
         title: '대제목',
         description: '소제목',
-        // imageUrl: '이미지주소',
-        // link: {
-        //   webUrl  : 'kakaotalk://leverage?action=sendtext&message=나는 원숭이다.',
-        //   androidExecParams : 'kakaotalk://leverage?action=sendtext&message=나는 원숭이다.',
-        //   iosExecParams : 'kakaotalk://leverage?action=sendtext&message=나는 원숭이다.'
-        // }
+        imageUrl: '이미지주소',
+        link: {
+          mobileWebUrl: 'kakaotalk://leverage',
+          webUrl: 'kakaotalk://leverage',
+          androidExecParams : 'action=sendtext&message=나는 원숭이다.',
+          iosExecParams : 'action=sendtext&message=나는 원숭이다.'
+        }
       },
       buttons: [
         {
           title: '버튼 타이틀',
           link: {
-            webUrl  : 'kakaotalk://leverage?action=sendtext&message=나는 원숭이다.',
-            androidExecParams: 'kakaotalk://leverage?action=sendtext&message=나는 원숭이다.',
-            iosExecParams: 'kakaotalk://leverage?action=sendtext&message=나는 원숭이다.'
+            mobileWebUrl: 'kakaotalk://leverage',
+            webUrl: 'kakaotalk://leverage',
+            androidExecParams : 'action=sendtext&message=나는 원숭이다.',
+          iosExecParams : 'action=sendtext&message=나는 원숭이다.'
           }
         }
       ]
