@@ -14,7 +14,12 @@
 function myFunction() {
   // document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
   try{
-  	window.webkit.messageHandlers.pedometerStart.postMessage(1, 2, resultStart);
+  	var message = {
+  		count: 123,
+  		text:'text111',
+  		callback:resultStart
+  	}
+  	window.webkit.messageHandlers.pedometerStart.postMessage(message);
 
   }catch(err){
   	alert(err);
@@ -24,6 +29,11 @@ function myFunction() {
 function myString() {
   // document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
   try{
+  	var message = {
+  		count: 456,
+  		text:'text222',
+  		callback:'resultStart'
+  	}
   	window.webkit.messageHandlers.pedometerStart.postMessage(1, 2, "resultStart");
 
   }catch(err){
