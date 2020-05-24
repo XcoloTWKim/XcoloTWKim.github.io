@@ -12,12 +12,33 @@
 
 <script>
 function myFunction() {
-  document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+  // document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+  try{
+  	window.webkit.messageHandlers.pedometerStart.postMessage(1, 2, resultStart);
+
+  }catch(err){
+  	alert(err);
+  }
 }
+
+function myString() {
+  // document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+  try{
+  	window.webkit.messageHandlers.pedometerStart.postMessage(1, 2, "resultStart");
+
+  }catch(err){
+  	alert(err);
+  }
+}
+
+function resultStart(resultParam){
+  	alert('result - '+resultParam);
+  }
 </script>
 
 <body>
-     <button id="demo" type="button" onclick="myFunction()">Click Me!</button>
+     <button id="demo" type="button" onclick="myFunction()">function</button>
+     <button id="demo" type="button" onclick="myString()">string</button>
 
 </body>
 </html>
