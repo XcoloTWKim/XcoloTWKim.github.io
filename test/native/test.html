@@ -14,7 +14,8 @@
 function myFunction() {
   // document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
   try{
-  	var message = [123, 'text111', resultStart];
+  	var message = '{"workStep" : 123, "message":"text111". resultStart}';
+    var obj = JSON.parse(message);
   	window.webkit.messageHandlers.pedometerStart.postMessage(message);
 
   }catch(err){
