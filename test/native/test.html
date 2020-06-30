@@ -42,7 +42,7 @@ function pedometerStart(){
  * 만보기 기능 활성화에 대한 콜백
  */
 function pedometerStartCallBack(result){
-  
+  console.log('pedometerStartCallBack result : ['+result+']');
   if(result != null){
     var data = JSON.parse(result);
     /*
@@ -101,6 +101,7 @@ function pedometerGetStep(){
  *  만보기 걸음 수 요청에 대한 콜백
  */
 function pedometerGetStepCallBack(result){
+	console.log('pedometerGetStepCallBack result : ['+result+']');
   // ex)결과값 리턴 result = "{\"message\":\"만보기 정보 조회 성공.\",\"step\":{\"2020-06-10\":2394,\"2020-06-03\":2927,\"2020-06-09\":3508,\"2020-06-08\":4044,\"2020-06-07\":151,\"2020-06-06\":67,\"2020-06-05\":3517,\"2020-06-04\":4938},\"code\":\"0000\"}"
   if(result != null){
     var data = JSON.parse(result);
@@ -173,6 +174,7 @@ function pedometerStop(){
  * 만보기 기능 비활성화에 대한 수신부 
  */
 function pedometerStopCallBack(result){
+	console.log('pedometerStopCallBack result : ['+result+']');
   if(result != null){
     var data = JSON.parse(result);
     if(data.code == '0000'){
