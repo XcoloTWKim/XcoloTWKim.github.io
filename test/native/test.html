@@ -150,11 +150,7 @@ function pedometerStop(){
     //json Object
     var jsonParam = JSON.stringify(param);
     /*
-      ex) JSON 파싱
-      data = {
-            "code": "0000"
-            "message": "만보기 기능이 비활성화 되었습니다."
-          }
+      callback : 콜백 받을 펑션 이름
     */
     
     if(checkMobile() == 'Android'){
@@ -175,6 +171,54 @@ function pedometerStop(){
  */
 function pedometerStopCallBack(result){
 	console.log('pedometerStopCallBack result : ['+result+']');
+  if(result != null){
+    var data = JSON.parse(result);
+    if(data.code == '0000'){
+      //만보기 기능 시작
+      alert('만보기 기능 종료 성공');
+    }else{
+      alert('만보기 기능 종료 실패 : '+ data.message);
+    }
+  }else{
+    alert('만보기 기능 종료 실패');
+  }
+}
+
+/*
+ *  만보기 기능 활성화 여부
+ */
+function isRunningPedometer(){
+  try{
+    /*
+      callback : 콜백 받을 펑션 이름
+    */
+    var param = {
+        callback : 'isRunningPedometerCallBack'
+    };
+    //json Object
+    var jsonParam = JSON.stringify(param);
+    /*
+      callback : 콜백 받을 펑션 이름
+    */
+    
+    if(checkMobile() == 'Android'){
+      window.AndroidPedometer.isRunningPedometer(jsonParam);
+    }else if(checkMobile() == 'iOS'){
+      window.webkit.messageHandlers.isRunningPedometer.postMessage(jsonParam);
+    }else{
+      alert('other OS');
+    }
+  
+  }catch(err){
+    alert(err);
+  }
+}
+
+/*
+ * 만보기 기능 비활성화에 대한 수신부 
+ */
+function isRunningPedometerCallBack(result){
+  console.log('isRunningPedometerCallBack result : ['+result+']');
   if(result != null){
     var data = JSON.parse(result);
     if(data.code == '0000'){
