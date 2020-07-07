@@ -101,7 +101,7 @@ function pedometerGetStep(){
  *  만보기 걸음 수 요청에 대한 콜백
  */
 function pedometerGetStepCallBack(result){
-	console.log('pedometerGetStepCallBack result : ['+result+']');
+  console.log('pedometerGetStepCallBack result : ['+result+']');
   // ex)결과값 리턴 result = "{\"message\":\"만보기 정보 조회 성공.\",\"step\":{\"2020-06-10\":2394,\"2020-06-03\":2927,\"2020-06-09\":3508,\"2020-06-08\":4044,\"2020-06-07\":151,\"2020-06-06\":67,\"2020-06-05\":3517,\"2020-06-04\":4938},\"code\":\"0000\"}"
   if(result != null){
     var data = JSON.parse(result);
@@ -170,7 +170,7 @@ function pedometerStop(){
  * 만보기 기능 비활성화에 대한 수신부 
  */
 function pedometerStopCallBack(result){
-	console.log('pedometerStopCallBack result : ['+result+']');
+  console.log('pedometerStopCallBack result : ['+result+']');
   if(result != null){
     var data = JSON.parse(result);
     if(data.code == '0000'){
@@ -221,14 +221,22 @@ function isRunningPedometerCallBack(result){
   console.log('isRunningPedometerCallBack result : ['+result+']');
   if(result != null){
     var data = JSON.parse(result);
+    
+    //{"message":"만보기 기능이 활성화 되었습니다.","isRunningPedometer":true,"code":"0000"}
+    
     if(data.code == '0000'){
-      //만보기 기능 시작
-      alert('만보기 기능 종료 성공');
+      
+      if(data.isRunningPedometer == true){
+        alert('만보기 기능이 활성화 되어 있습니다.');
+      }else{
+        alert('만보기 기능이 활성화 되어 있지 않습니다.');
+      }
+      
     }else{
-      alert('만보기 기능 종료 실패 : '+ data.message);
+      alert('오류 : '+ data.message);
     }
   }else{
-    alert('만보기 기능 종료 실패');
+    alert('오류');
   }
 }
 
@@ -288,6 +296,8 @@ Number.prototype.zf = function(len){return this.toString().zf(len);};
      <button id="demo1" type="button" onclick="pedometerStart()">pedometer Start</button>
      <button id="demo2" type="button" onclick="pedometerGetStep()">pedometer getStep</button>
      <button id="demo3" type="button" onclick="pedometerStop()">pedometer End</button>
+     <br></br>
+     <button id="demo3" type="button" onclick="isRunningPedometer()">is running pedometer</button>
 
 </body>
 </html>
