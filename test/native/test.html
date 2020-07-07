@@ -125,13 +125,13 @@ function pedometerGetStepCallBack(result){
     
     //code 가 '0000' 이 아닌경우 오류
     if(data.code == '0000'){
-      alert('걸음 수 가져오기 성공');
+      alert('걸음 수 가져오기 성공 : '+result+ );
       console.log(data.step);
     }else{
       alert('걸음 수 가져오기 실패 : '+ data.message);
     }
   }else{
-    alert('걸음 수 가져오기 실패');
+    alert('걸음 수 가져오기 실패 (알 수 없는 오류)');
   }
   
 }
