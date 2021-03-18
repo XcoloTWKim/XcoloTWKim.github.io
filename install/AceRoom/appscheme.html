@@ -52,6 +52,18 @@
 </style>
 
 <script language="javascript">
+     // var timer;
+     // var schInterval;
+
+     // function intervalSch(){
+     //      // 매 인터벌 마다 웹뷰가 활성화 인지 체크
+     //      if(document.webkitHidden || document.hidden){// 웹뷰 비활성화
+     //           clearTimer();// 앱이 설치되어있을 경우 타이머 제거
+     //      }else{    // 웹뷰 활성화
+     //           window.location.href = landingApp.appScheme.iOSStore;
+     //      }
+     }
+
      var landingApp = {
           appScheme : {
                Android: "market://details?id=com.acebed.aceroom&launch=true&url=aceroom://main",
@@ -72,13 +84,21 @@
                }
           },
           launchIOS : function() {
-               var clickedAt = +new Date;
+               // var clickedAt = +new Date;
                var appCheckTimer = setTimeout(function() {
-                    if (+new Date - clickedAt < 1000) {
+                    // if (+new Date - clickedAt < 1000) {
+                    //      window.location.href = landingApp.appScheme.iOSStore;
+                    // }
+                    if((document.webkitHidden || document.hidden) == false ){// 웹뷰 활성화
                          window.location.href = landingApp.appScheme.iOSStore;
                     }
-               }, 500);
+                    clearTimer();
+               }, 1000);
                window.location.href = landingApp.appScheme.iOS;
+
+               schInterval = setInterval(intervalSch, 500);
+
+
           },
           launchAndroid : function() {
                window.location.href = landingApp.appScheme.Android;
@@ -92,7 +112,7 @@
                } else {
                     // alert('모바일에서 열어주세요!!');
                }
-          }
+          },
      };
 
      function init() {
