@@ -51,17 +51,75 @@
      }
 </style>
 
-<body>
+<script language="javascript">
+     var landingApp = {
+          appScheme : {
+               Android: "market://details?id=com.acebed.aceroom&launch=true&url=aceroom://main",
+               iOS: "aceroom://main",
+               iOSStore: "https://itunes.apple.com/kr/app/ace-room/id1485848367"
+          },
+          getOSName : function() {
+               var userAgent = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+               if ( userAgent.indexOf('android') > -1) {
+                    //안드로이드
+                    return "android";
+               } else if ( userAgent.indexOf("iphone") > -1||userAgent.indexOf("ipad") > -1||userAgent.indexOf("ipod") > -1 ) {
+                    //IOS
+                    return "ios";
+               } else {
+                    //아이폰, 안드로이드 외
+                    return "other";
+               }
+          },
+          launchIOS : function() {
+               var clickedAt = +new Date;
+               var appCheckTimer = setTimeout(function() {
+                    if (+new Date - clickedAt < 2000) {
+                         window.location.href = landingApp.appScheme.iOSStore;
+                    }
+               }, 50);
+               window.location.href = landingApp.appScheme.iOS;
+          },
+          launchAndroid : function() {
+               window.location.href = landingApp.appScheme.Android;
+          },
+          launchAPP : function() {
+               var osName = landingApp.getOSName();
+               if (osName === 'android') {
+                    landingApp.launchAndroid();
+               } else if (osName === 'ios') {
+                    landingApp.launchIOS();
+               } else {
+                    alert('모바일에서 열어주세요!!');
+               }
+          }
+     };
+
+     function init() {
+          //화면 열리자 마자 이동하기
+          landingApp.launchAPP();
+     }
+</script>
+
+<body onload="init();">
      <div class="xcolo">
           <img src="../images/xcolo.png" class="logo">
           <div class="download" style="border-top:2px solid #88A59D">
-               <p><strong style="font-size:24px">Ace Room App Link</p>
-               <!-- <div class="btn">
-                    <a href="itms-services://?action=download-manifest&url=https://xcolotwkim.github.io/install/roadriskinfo/manifest.plist"><img src="logo.png"> Android</a>
-               </div> -->
-               <div></div>
+               <p><strong style="font-size:24px">Ace Room App Landing Page Sample</p>
+               <h5>해당 화면은 Ace Room 랜딩페이지 샘플입니다.</h5>
+               <h6>해당 화면은 Ace Room 랜딩페이지 샘플입니다.</h6>
+
+               <br>
                <div class="btn">
-                    <a href="aceroom://ace">Link</a>
+                    <a href="javascript:landingApp.launchAPP()">앱 공통 - 앱 실행 혹은 스토어 열기</a>
+               </div>
+               <br>
+               <div class="btn">
+                    <a href="javascript:landingApp.launchAndroid()">Android - 앱 실행 혹은 스토어 열기</a>
+               </div>
+               <br>
+               <div class="btn">
+                    <a href="javascript:landingApp.launchIOS()">iOS - 앱 실행 혹은 스토어 열기</a>
                </div>
           </div>
      </div>
