@@ -74,7 +74,7 @@
           launchIOS : function() {
                var clickedAt = +new Date;
                var appCheckTimer = setTimeout(function() {
-                    if (+new Date - clickedAt < 2000) {
+                    if (+new Date - clickedAt < 5000) {
                          window.location.href = landingApp.appScheme.iOSStore;
                     }
                }, 50);
@@ -90,7 +90,7 @@
                } else if (osName === 'ios') {
                     landingApp.launchIOS();
                } else {
-                    alert('모바일에서 열어주세요!!');
+                    // alert('모바일에서 열어주세요!!');
                }
           }
      };
@@ -107,7 +107,6 @@
           <div class="download" style="border-top:2px solid #88A59D">
                <p><strong style="font-size:24px">Ace Room App Landing Page Sample</p>
                <h5>해당 화면은 Ace Room 랜딩페이지 샘플입니다.</h5>
-               <h6>해당 화면은 Ace Room 랜딩페이지 샘플입니다.</h6>
 
                <br>
                <div class="btn">
