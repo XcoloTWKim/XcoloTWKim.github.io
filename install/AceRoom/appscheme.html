@@ -85,6 +85,9 @@
           },
           launchIOS : function() {
                // var clickedAt = +new Date;
+               
+               window.location.href = landingApp.appScheme.iOS;
+
                var appCheckTimer = setTimeout(function() {
                     // if (+new Date - clickedAt < 1000) {
                     //      window.location.href = landingApp.appScheme.iOSStore;
@@ -93,12 +96,7 @@
                          window.location.href = landingApp.appScheme.iOSStore;
                     }
                     // clearTimer();
-               }, 1000);
-               window.location.href = landingApp.appScheme.iOS;
-
-               // schInterval = setInterval(intervalSch, 500);
-
-
+               }, 2000);
           },
           launchAndroid : function() {
                window.location.href = landingApp.appScheme.Android;
