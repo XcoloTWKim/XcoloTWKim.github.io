@@ -75,7 +75,7 @@
                var clickedAt = +new Date;
                window.location.href = landingApp.appScheme.iOS;
                var appCheckTimer = setTimeout(function() {
-                    if (+new Date - clickedAt > 4000) {
+                    if (+new Date - clickedAt < 4000) {
                          window.location.href = landingApp.appScheme.iOSStore;
                     }
                }, 2000);
