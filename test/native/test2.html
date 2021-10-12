@@ -69,11 +69,12 @@ function loginCompleteCallBack(result){
  */
 function sendFinish(){
 	try{
+		var jsonParam = JSON.stringify({});
 		//Android iOS 호출 방식의 차이로 인한 구분
 		if(checkMobile() == 'Android'){
-			window.AndroidMyHonda.onFinish();
+			window.AndroidMyHonda.onFinish(jsonParam);
 		}else if(checkMobile() == 'iOS'){
-			window.webkit.messageHandlers.myHondaOnFinish.postMessage();
+			window.webkit.messageHandlers.myHondaOnFinish.postMessage(jsonParam);
 		}else{
 			alert('other OS');
 		}
@@ -87,11 +88,12 @@ function sendFinish(){
  */
 function sendMemberExitComplete(){
 	try{
+		var jsonParam = JSON.stringify({});
 		//Android iOS 호출 방식의 차이로 인한 구분
 		if(checkMobile() == 'Android'){
-			window.AndroidMyHonda.onExitMember();
+			window.AndroidMyHonda.onExitMember(jsonParam);
 		}else if(checkMobile() == 'iOS'){
-			window.webkit.messageHandlers.myHondaOnExitMember.postMessage();
+			window.webkit.messageHandlers.myHondaOnExitMember.postMessage(jsonParam);
 		}else{
 			alert('other OS');
 		}
