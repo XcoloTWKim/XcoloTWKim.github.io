@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- 동적 레이아웃 meta data -->
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<!-- apple ipa 파일 인증용 meta data 불필요시 제거 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Native Bridge Sample</title>
+</head>
+
+<script>
+
+/*
+ * 웹 -> 앱 로그인 알림
+ */
+function sendLoginComplete(){
+	try{
+		/*
+			callback : 콜백 받을 펑션 이름
+		*/
+		var param = {
+			callback : 'loginCompleteCallBack'
+		};
+		//json Object
+		var jsonParam = JSON.stringify(param);
+		
+		//Android iOS 호출 방식의 차이로 인한 구분
+		if(checkMobile() == 'Android'){
+			window.AndroidMyHonda.onLoginC(jsonParam);
+		}else if(checkMobile() == 'iOS'){
+			window.webkit.messageHandlers.myHondaOnLoginComplete.postMessage(jsonParam);
+		}else{
+			alert('other OS');
+		}
+	}catch(err){
+		alert(err);
+	}
+}
+
+/*
+ * 웹 -> 앱 로그인 알림 콜백
+ */
+function loginCompleteCallBack(result){
+	
+	if(result != null){
+		var data = JSON.parse(result);
+		/*
+			ex) JSON 파싱
+			data = {
+						"code": "0000"
+						"message": "앱 로그인 연동 성공"
+					}
+		*/
+		
+		//code 가 '0000' 이 아닌경우 오류
+		if(data.code == '0000'){
+			alert('앱 로그인 성공');
+		}else{
+			alert('앱 로그인 실패 : '+ data.message);
+		}
+	}else{
+		alert('로그인 여부 전달 실패');
+	}
+}
+
+/*
+ * 웹 -> 앱 웹화면 닫기
+ */
+function sendFinish(){
+	try{
+		//Android iOS 호출 방식의 차이로 인한 구분
+		if(checkMobile() == 'Android'){
+			window.AndroidMyHonda.onFinish();
+		}else if(checkMobile() == 'iOS'){
+			window.webkit.messageHandlers.myHondaOnFinish.postMessage();
+		}else{
+			alert('other OS');
+		}
+	}catch(err){
+		alert(err);
+	}
+}
+
+/*
+ * 웹 -> 앱 회원 탈퇴 알림
+ */
+function sendMemberExitComplete(){
+	try{
+		//Android iOS 호출 방식의 차이로 인한 구분
+		if(checkMobile() == 'Android'){
+			window.AndroidMyHonda.onExitMember();
+		}else if(checkMobile() == 'iOS'){
+			window.webkit.messageHandlers.myhondaOnExitMember.postMessage();
+		}else{
+			alert('other OS');
+		}
+	}catch(err){
+		alert(err);
+	}
+}
+
+/*
+ * 테스트용 - Android / iOS 구분용 
+ */
+function checkMobile(){
+    var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+    if ( varUA.indexOf('android') > -1) {
+        //안드로이드
+        return "Android";
+    } else if ( varUA.indexOf("iphone") > -1||varUA.indexOf("ipad") > -1||varUA.indexOf("ipod") > -1 ) {
+        //IOS
+        return "iOS";
+    } else {
+        //아이폰, 안드로이드 외
+        return "other";
+    }
+}
+
+</script>
+
+<body>
+     
+     <br></br>
+     <br></br>
+     <button id="demo1" type="button" onclick="sendLoginComplete()">Login</button>
+     <button id="demo2" type="button" onclick="sendFinish()">Logout</button>
+     <button id="demo3" type="button" onclick="sendMemberExitComplete()">Member EXIT</button>
+     <button id="demo4" type="button" onclick="requestPushToken()">get Push Token</button>
+
+</body>
+</html>
