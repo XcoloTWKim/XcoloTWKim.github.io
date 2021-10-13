@@ -12,64 +12,18 @@
 <script>
 
 /*
- * 웹 -> 앱 로그인 알림
+ * 웹 -> 앱 웹화면 닫기
  */
-function sendLoginComplete(){
+function sendFinish(){
 	try{
 		/*
 			callback : 콜백 받을 펑션 이름
 		*/
 		var param = {
-			callback : 'loginCompleteCallBack'
+			// callback : 'finishCallback'
 		};
 		//json Object
 		var jsonParam = JSON.stringify(param);
-		
-		//Android iOS 호출 방식의 차이로 인한 구분
-		if(checkMobile() == 'Android'){
-			window.AndroidMyHonda.onLoginComplete(jsonParam);
-		}else if(checkMobile() == 'iOS'){
-			window.webkit.messageHandlers.myHondaOnLoginComplete.postMessage(jsonParam);
-		}else{
-			alert('other OS');
-		}
-	}catch(err){
-		alert(err);
-	}
-}
-
-/*
- * 웹 -> 앱 로그인 알림 콜백
- */
-function loginCompleteCallBack(result){
-	
-	if(result != null){
-		var data = JSON.parse(result);
-		/*
-			ex) JSON 파싱
-			data = {
-						"code": "0000"
-						"message": "앱 로그인 연동 성공"
-					}
-		*/
-		
-		//code 가 '0000' 이 아닌경우 오류
-		if(data.code == '0000'){
-			alert('앱 로그인 성공');
-		}else{
-			alert('앱 로그인 실패 : '+ data.message);
-		}
-	}else{
-		alert('로그인 여부 전달 실패');
-	}
-}
-
-/*
- * 웹 -> 앱 웹화면 닫기
- */
-function sendFinish(){
-	try{
-		var jsonParam = JSON.stringify({});
 		//Android iOS 호출 방식의 차이로 인한 구분
 		if(checkMobile() == 'Android'){
 			window.AndroidMyHonda.onFinish(jsonParam);
@@ -84,39 +38,29 @@ function sendFinish(){
 }
 
 /*
- * 웹 -> 앱 회원 탈퇴 알림
+ * 앱 -> 웹 콜백 (샘플)
  */
-function sendMemberExitComplete(){
-	try{
-		var jsonParam = JSON.stringify({});
-		//Android iOS 호출 방식의 차이로 인한 구분
-		if(checkMobile() == 'Android'){
-			window.AndroidMyHonda.onExitMember(jsonParam);
-		}else if(checkMobile() == 'iOS'){
-			window.webkit.messageHandlers.myHondaOnExitMember.postMessage(jsonParam);
+function finishCallback(result){
+	
+	if(result != null){
+		var data = JSON.parse(result);
+		/*
+			ex) JSON 파싱
+			data = {
+						"code": "0000"
+						"message": "처리 완료"
+					}
+		*/
+		
+		//code 가 '0000' 이 아닌경우 오류
+		if(data.code == '0000'){
+			alert('콜백 수신 성공');
 		}else{
-			alert('other OS');
+			alert('앱 처리 실패 : '+ data.message);
 		}
-	}catch(err){
-		alert(err);
+	}else{
+		alert('수신된 콜백 데이터 없음.');
 	}
-}
-
-/*
- * 테스트용 - Android / iOS 구분용 
- */
-function checkMobile(){
-    var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
-    if ( varUA.indexOf('android') > -1) {
-        //안드로이드
-        return "Android";
-    } else if ( varUA.indexOf("iphone") > -1||varUA.indexOf("ipad") > -1||varUA.indexOf("ipod") > -1 ) {
-        //IOS
-        return "iOS";
-    } else {
-        //아이폰, 안드로이드 외
-        return "other";
-    }
 }
 
 </script>
