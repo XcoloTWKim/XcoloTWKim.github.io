@@ -64,6 +64,29 @@ function finishCallback(result){
 }
 
 /*
+ * 웹 -> 앱 정비예약 신청 현황 열기
+ */
+function openViewSpareStatus(){
+	try{
+		var param = {
+			viewName:"spareStatus"
+		};
+		//json Object
+		var jsonParam = JSON.stringify(param);
+		//Android iOS 호출 방식의 차이로 인한 구분
+		if(checkMobile() == 'Android'){
+			window.AndroidMyHonda.onOpenView(jsonParam);
+		}else if(checkMobile() == 'iOS'){
+			window.webkit.messageHandlers.myHondaOnOpenView.postMessage(jsonParam);
+		}else{
+			alert('other OS');
+		}
+	}catch(err){
+		alert(err);
+	}
+}
+
+/*
  * 테스트용 - Android / iOS 구분용 
  */
 function checkMobile(){
@@ -87,7 +110,7 @@ function checkMobile(){
      
      <br></br>
      <br></br>
-     <button id="demo2" type="button" onclick="sendFinish()">웹뷰 화면 닫기</button>
+     <button id="demo2" type="button" onclick="openViewSpareStatus()">예약현황 화면 닫기</button>
 
 </body>
 </html>
